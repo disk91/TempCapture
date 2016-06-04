@@ -4,8 +4,6 @@
 #include <LowPower.h>
 
 CAT24M01 EEPROM1(0);
-char str[10] = "Hello"; 
-char str2[10];
 float crFactor =1.0;
 
 /* Pour info */
@@ -68,7 +66,7 @@ typedef struct s_temp {
 } t_temp;
 t_temp temps;
 
-#define convert2decdeg(x) (((((x*v) / 1024)-500)/10))
+#define convert2decdeg(x) (round((((x*v) / 1024)-500)/10))
 void refreshTemps() {
   long v = readVcc();
   long  a;
@@ -192,6 +190,5 @@ void loop() {
     } 
     
   } while ( currentMillis < LOOPCYCLE_MS );
-  Serial.print(".");
 
 }
